@@ -1,42 +1,43 @@
-import CourseGoal from "./components/CourseGoal"
-import './App.css'
+
+import CourseGoalList from './components/CourseGoalList';
 import Header from "./components/Header"
 import { useState } from "react"
+import NewGoal from './components/NewGoal';
+import goalsImg from './asset/goal.jpg'
 
-type CourseGoal = {
+export type CourseGoal = {
   id: number;
   title: string;
   description: string;
+
 }
 
 function App() {
   const [goals, setGoals] = useState<CourseGoal[]>([]);
 
-  function handleAddGoal() {
+  function handleAddGoal(goal: string, summary: string) {
     setGoals((prevGoal => {
       const newGoal: CourseGoal = {
         id: Math.random(),
-        title: 'Learn React plus TypeScript',
-        description: 'Learn React and TypeScript Fundamental from Zero to Hero',
+        title: goal,
+        description: summary,
       }
       return [...prevGoal, newGoal];
     }));
   }
+
+  function handleDeleteGoal(id: number) {
+    setGoals(prevGoal => prevGoal.filter((goal) => goal.id !== id));
+  }
   return (
-    <main>
-      <Header image={{ src: 'image.path', alt: 'A list of Goals' }}>
-        <h1> Your Course Goals </h1>
-      </Header>
-      <button onClick={handleAddGoal}> Add Goal </button>
-      <ul>
-        {goals.map((goal) => (
-          <li key={goal.id}>
-            <CourseGoal title={goal.title}>
-              <p> {goal.description} </p>
-            </CourseGoal>
-          </li>
-        ))}
-      </ul>
+    <main className='flex items-center justify-center p-10'>
+      <div className=''>
+        <Header image={{ src: goalsImg, alt: 'A list of Goals' }}>
+          <h1 className='font-bold text-3xl'> Your Course Goals </h1>
+        </Header>
+        <NewGoal onAddGoal={handleAddGoal} />
+        <CourseGoalList goals={goals} onDeleteGoal={handleDeleteGoal} />
+      </div>
     </main>
   )
 }
