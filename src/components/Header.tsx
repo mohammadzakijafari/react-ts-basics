@@ -10,9 +10,9 @@ interface HeaderProps {
 
 const Header = ({ image, children }: HeaderProps) => {
     return (
-        <div>
+        <div className='flex flex-col items-center gap-10'>
             <img src={image.src} alt={image.alt}
-                className='h-96 w-auto rounded' />
+                className='h-48 w-48 rounded-full' />
             {children}
         </div>
     )

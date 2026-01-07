@@ -20,24 +20,26 @@ const NewGoal = ({ onAddGoal }: NewGoalProps) => {
         onAddGoal(enteredGoal, enteredSummary);
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor='goal'> New Goal </label>
+        <form onSubmit={handleSubmit} className='pt-10'>
+            <label htmlFor='goal' className='font-bold text-lg'> New Goal </label>
             <input
                 type='text'
                 id='goal'
-                className='border border-gray-300 px-2 py-1 rounded w-full'
+                className='border border-gray-400 px-2 py-1 rounded w-full'
                 placeholder='Enter Your Goal'
                 ref={goal} />
 
-            <label htmlFor='summary'> Summary </label>
+            <label htmlFor='summary' className='font-bold text-lg'> Summary </label>
             <input
                 type='text'
                 id='summary'
-                className='border border-gray-300 px-2 py-1 rounded w-full'
+                className='border border-gray-400 px-2 py-1 rounded w-full'
                 placeholder='Enter Goal Summary'
                 ref={summary} />
 
-            <button className='bg-green-600 px-4 py-2 rounded text-white'> Add Goal </button>
+            <div className='flex flex-col items-center p-5'>
+                <button className='bg-green-600 px-4 py-2 rounded text-white'> Add Goal </button>
+            </div>
         </form>
     )
 }
